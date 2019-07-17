@@ -23,6 +23,9 @@
   --font25 : 25px;
   --padding50 : 50px;
   --padding25 : 25px;
+  --boxShadow : 3px 3px 5px rgba(0,0,0,0.3);
+  --yellowRgba : rgba(214, 223, 32, 0.70);
+  --max1440 : 1440px;
 }
    html {
     color: #222;
@@ -132,6 +135,71 @@ img {
   width: 100%;
   height: auto;
 }
+/*
+  Custom Select
+*/
+
+/*the container must be positioned relative:*/
+.custom-select {
+  position: relative;
+
+}
+
+.custom-select select {
+  display: none; /*hide original SELECT element:*/
+}
+
+.select-selected {
+  background-color: var(--organgeColor);
+}
+
+/*style the arrow inside the select element:*/
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+/*point the arrow upwards when the select box is open (active):*/
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
+}
+
+/*style the items (options), including the selected item:*/
+.select-items div,.select-selected {
+  color: #ffffff;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+  user-select: none;
+}
+
+/*style items (options):*/
+.select-items {
+  position: absolute;
+  background-color: var(--organgeColor);
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+/*hide the items when the select box is closed:*/
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
 .backGrey {
   background-color: var(--kirikBeyaz);
 
@@ -142,7 +210,7 @@ img {
   flex-wrap: wrap;
   justify-content: space-between;
 
-  max-width: 1440px;
+  max-width: var(--max1440);
   margin:0 auto;
 
 }
@@ -198,7 +266,7 @@ img {
 
 header {
   width: 100%;
-  max-width: 1440px;
+  max-width: var(--max1440);
   margin:0 auto;
 
 }
@@ -391,7 +459,7 @@ header .mainMenu .mainMenuRight .menuSecondrow ul li:hover::after , .aktif::afte
   /* slider*/
 .sliderContainer {
   width: 100%;
-  max-width: 1440px;
+  max-width: var(--max1440);
   margin:0 auto;
   border-radius: 20px;
 }
@@ -443,7 +511,7 @@ header .mainMenu .mainMenuRight .menuSecondrow ul li:hover::after , .aktif::afte
 }
 .mpBlock .mpHeader {
   display: flex;
-  max-width: 1440px;
+  max-width:  var(--max1440);
   margin:0 auto;
   justify-content: flex-end;
   align-items: center;
@@ -911,6 +979,51 @@ footer .footerAdres a img{
 .tekHaberContainer .tekHaberTitle h1 {
   font-size: 30px;
 }
+.tekHaberContainer img {
+  border-radius: 10px;
+}
+.backgreybefore {
+  width: 100%;
+  position: relative;
+  margin-top:10%;
+}
+.sonhaberler {
+  max-width:var(--max1440);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 30px auto;
+  position: relative;
+  overflow: hidden;
+}
+.backgreybefore::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 350px;
+  left:0%;
+  top:-5%;
+  background-color: #ebebeb;
+}
+.sonhaberler .titleHaber {
+  width: 100%;
+  text-align: center;
+  padding: 20px 0px;
+}
+.sonhaberler .titleHaber h4 {
+  font-size: 30px;
+}
+.sonhaberler .mainBlog {
+  justify-content:space-between;
+}
+.sonhaberler .mainBlog .mainBlogSingle {
+  max-width: calc(100% / 3 - 40px);
+  border-radius: 20px;
+  height: 500px;
+  position: relative;
+  margin-bottom: 4%;
+}
 /*******************
 * Üyeler Sayfası
 *******************/
@@ -926,7 +1039,7 @@ footer .footerAdres a img{
   box-shadow: 2px 5px 5px rgba(0,0,0,0.2);
   border-radius: 10px;
 }
-.uyelerContainer .uyeItem .uyeLogo , .uyelerContainer .uyeItem .uyeImg{
+.uyelerContainer .uyelerImages{
   flex-basis: 20%;
   padding: 20px;
 }
@@ -949,6 +1062,38 @@ footer .footerAdres a img{
   margin-bottom: 40px;
 }
 
+/*******************
+* Yarışma Sayfası
+*******************/
+.yarismaContainer {
+  max-width: var(--max1440);
+  margin:0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+.yarismaContainer .yarismaItem {
+  width:calc(100% / 3 - 40px );
+  margin:20px;
+  height: 400px;
+  border-radius: 10px;
+  box-shadow: var(--boxShadow);
+  display: flex;
+  align-items: flex-end;
+
+}
+.yarismaContainer .yarismaItem a {
+  background-color: var(--yellowRgba);
+  padding:50px 20px;
+  font-size: 15px;
+  width: 100%;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  color: #000;
+
+}
+
 
 /*
   ##Device = Desktops
@@ -958,12 +1103,13 @@ footer .footerAdres a img{
 @media (min-width: 1281px) and (max-width: 1440px) {
   :root {
     --font25: 18px;
+    --max1440: 1280px;
 
   }
 
   header,.sliderContainer,.mpBlock .mpHeader,.Col {
 
-    max-width: 1280px;
+    max-width: var(--max1440);
 
   }
   .mpBlock iframe {
@@ -991,6 +1137,10 @@ footer .footerAdres a img{
   .adContainer .adSingle:nth-child(2) {
     margin-bottom: 11%;
   }
+/*  tek haberler mobil */
+  .sonhaberler .mainBlog .mainBlogSingle {
+     height: auto;
+  }
 
 }
 
@@ -1002,6 +1152,7 @@ footer .footerAdres a img{
 @media (min-width: 1025px) and (max-width: 1280px) {
   :root {
     --font25: 12px;
+    --max1440: 1025px;
 
   }
   .mpBlock iframe {
@@ -1052,6 +1203,7 @@ footer .footerAdres a img{
 
 main,header,footer .footerContent,footer .footerRegister,.sliderContainer { max-width: 1025px; margin:0 auto;}
 
+
 }
 
 /*
@@ -1065,6 +1217,7 @@ main,header,footer .footerContent,footer .footerRegister,.sliderContainer { max-
 
     --font25 : 14px;
     --padding50 : 0px;
+    --max1440: 750px;
   }
   /*col */
   .Col {
@@ -1223,6 +1376,11 @@ main,header,footer .footerContent,footer .footerRegister,.sliderContainer { max-
   footer .w20:last-child {
     flex-basis: 100%;
     margin-top: 20px;
+  }
+/*  tek haber ipad */
+  .sonhaberler .mainBlog .mainBlogSingle {
+    max-width: calc(100% / 3 - 10px);
+
   }
 
 }
@@ -1403,6 +1561,229 @@ main,header,footer .footerContent,footer .footerRegister,.sliderContainer { max-
 .kurulContainer .kurulItem {
   margin-bottom: 40px;
 }
+.buttonGroup {
+  width: 100%;
+}
+.buttonGroup ul {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+}
+.buttonGroup ul li {
+   flex-basis: content;
+   list-style-type: none;
+ }
+.buttonGroup ul li a {
+  padding: 10px 15px;
+  list-style-type: none;
+  border:3px solid #CCCCCC;
+  margin-right: 10px  ;
+  border-radius: 10px;
+  color:#CCCCCC;
+
+}
+.buttonGroup ul li.active a , .buttonGroup ul li a:hover{
+  background-color: #CCCCCC;
+  color:#fff;
+}
+.uyeAlfabetik {
+  width: 100%;
+}
+.uyeAlfabetik ul {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.uyeAlfabetik ul li {
+  list-style-type: none;
+}
+
+.uyeAlfabetik ul li a {
+  padding: 5px;
+  margin:2px;
+  border-radius: 5px;
+  color: #cccccc;
+
+
+}
+.uyeAlfabetik ul li a.active {
+  color: #000;
+}
+
+.fuarContainer {
+  max-width:  var(--max1440);
+  width: 100%;
+  margin:0 auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+.fuarContainer .fuarDateMenu {
+  width: 20%;
+  margin-top:50px;
+  display: flex;
+  justify-content: center;
+
+}
+.fuarContainer .fuarDateMenu ul {
+
+
+
+}
+.fuarContainer .fuarDateMenu li {
+  list-style-type: none;
+
+}
+.fuarContainer .fuarDateMenu li  a {
+  color :#CCCCCC;
+}
+.fuarContainer .fuarDateMenu li  a.hover, .active {
+  color:#000000 !important;
+}
+
+.fuarContainer .fuarTable {
+  width: 80%;
+}
+/* Style the tab */
+.fuarContainer .tab {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+/* Style the buttons that are used to open the tab content */
+.fuarContainer .tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  color:#cccccc;
+}
+
+/* Change background color of buttons on hover */
+.fuarContainer .tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.fuarContainer .tab button.active {
+  color:#000000;
+}
+
+/* Style the tab content */
+.fuarContainer .tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border-top: none;
+  animation: fadeEffect 1s; /* Fading effect takes 1 second */
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+/* Go from zero to full opacity */
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+.fuarContainer .tabcontent .fuarItem {
+  margin: 20px;
+  max-width: calc(100% / 3 - 40px);
+  box-shadow:var(--boxShadow) ;
+  border-radius: 10px;
+
+}
+.fuarContainer .tabcontent .fuarItem .fuarText {
+  padding: 20px;
+}
+.fuarContainer .tabcontent .fuarItem .fuarTitle, .fuarContainer .tabcontent .fuarItem .fuarDate,.fuarContainer .tabcontent .fuarItem .fuarYer {
+  font-size: 16px;
+  color:#AFAFAF;
+  font-weight: 700;
+
+
+}
+.fuarContainer .tabcontent .fuarItem .fuarTitle span ,.fuarContainer .tabcontent .fuarItem .fuarDate span {
+  display: block;
+  width: 100%;
+
+}
+
+.fuarContainer .tabcontent .fuarItem .fuarTitle span:last-child,.fuarContainer .tabcontent .fuarItem .fuarDate span:last-child {
+  color:#000000;
+  margin-bottom: 10px;
+}
+.fuarContainer .tabcontent .fuarItem .fuarLogo {
+  width: 100%;
+  display: block;
+  margin:20px 0px
+}
+.fuarContainer .tabcontent .fuarItem .fuarLogo img{
+  max-width: 150px;
+  margin:0 auto;
+  display: block;
+}
+.fuarContainer .tabcontent .fuarItem a {
+  background-color: var(--organgeColor);
+  padding: 30px 0px;
+  color:#fff;
+  text-align: center;
+  display: block;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+
+/*
+  Aktuel Bülten
+*/
+.aktuelBultenContainer {
+  max-width: var(--max1440);
+  margin:0 auto ;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.aktuelBultenContainer .BultenItem {
+  width: calc(100% / 4 - 40px);
+  margin:20px;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  box-shadow: var(--boxShadow);
+  height: 400px ;
+  display: flex;
+  align-items: flex-end;
+
+}
+.aktuelBultenContainer .BultenItem a {
+  background-color: #8781BD;
+  width: 100%;
+  display: block;
+  padding: 30px;
+  text-align: center;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+
+}
+.aktuelBultenContainer .BultenItem a span {
+  width: 100%;
+  display: block;
+  color:#fff;
+  font-size: 18px;
+  font-weight: 700;
+}
+.aktuelBultenContainer .BultenItem a img {
+  max-width: 30px;
+  display: block;
+  margin-left: auto;
+
+
+}
+
 
 /*
   ##Device = Low Resolution Tablets, Mobiles (Landscape)
@@ -1568,6 +1949,11 @@ main,header,footer .footerContent,footer .footerRegister,.sliderContainer { max-
   }
   .kurulContainer .kurulBaslik {
     margin: 40px 0px;
+  }
+/*  yarışma html*/
+  .yarismaContainer .yarismaItem {
+    width: calc(100% / 2 - 40px );
+
   }
 
 
@@ -1743,6 +2129,57 @@ main,header,footer .footerContent,footer .footerRegister,.sliderContainer { max-
     height: 500px;
 
   }
+  /*uyeler*/
+  .uyelerContainer ul {
+    padding: 0 10px;
+  }
+  .uyelerContainer .uyeItem {
+    margin:0;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .uyelerContainer .uyeItem .uyeinfo {
+    flex-basis: 100%;
+    padding: 20px;
+  }
+  .uyelerContainer .uyeItem  .uyelerImages  {
+    flex-basis: 100%;
+    padding: 20px;
+  }
+  /*Aktuel bülten*/
+  .aktuelBultenContainer .BultenItem {
+    width: 100%;
+  }
+  /*Fuar */
+
+  .fuarContainer .fuarTable {
+    width: 100%;
+  }
+  .fuarContainer .tabcontent .fuarItem {
+    max-width: 100%;
+  }
+/*  yarışma html mobil*/
+  .yarismaContainer .yarismaItem {
+    width: calc(100% / 1 - 20px );
+    margin: 20px;
+    height: 400px;
+    border-radius: 10px;
+    box-shadow: var(--boxShadow);
+    display: flex;
+    align-items: flex-end;
+  }
+/*  üyeler html mobil*/
+
+/*  Tek haberler html mobil*/
+  .sonhaberler .mainBlog {
+    justify-content: center;
+  }
+  .sonhaberler .mainBlog .mainBlogSingle {
+    max-width: calc(100%  - 20px);
+
+  }
+
 }
 
 
